@@ -1,16 +1,16 @@
 package com.catalisa.Exercicio.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
-
 @Entity
-@Table
+@Table (name = "TB_LIVROS") //criaçao de tabela
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class LivrosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

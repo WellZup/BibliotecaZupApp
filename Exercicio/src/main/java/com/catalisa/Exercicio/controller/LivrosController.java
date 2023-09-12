@@ -4,51 +4,51 @@ import com.catalisa.Exercicio.model.LivrosModel;
 import com.catalisa.Exercicio.service.LivrosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path = "/api/livros/") //path
 public class LivrosController {
 
     @Autowired
     LivrosService livrosService;
-    //Endpoints
 
-    //Requisicção Get
-    @GetMapping(path = "/livros")
+    //Requisicao get
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping
     public List<LivrosModel> buscaTodosLivros() {
         return livrosService.buscarTodos();
     }
 
-    @GetMapping(path = "/livros/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping(path = "{id}")
     public Optional<LivrosModel> buscarLivrosPorId(@PathVariable Long id) {
         return livrosService.buscarPorId(id);
     }
 
     //Requisição Post
-
-    @PostMapping(path = "/livros")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LivrosModel cadastrarNovoLivro(@RequestBody LivrosModel livrosModel) {
-        return null;
+        return livrosService.cadastrar(livrosModel);
     }
 
     //Requisição Put
-    @PutMapping(path = "/livros/{id}")
-    public LivrosModel alteraLivro(@PathVariable Long id,
-                                   @RequestBody LivrosModel livrosModel) {
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping(path = "{id}")
+    public LivrosModel alteraLivro(@PathVariable Long id, @RequestBody LivrosModel livrosModel) {
         return livrosService.alterar(id, livrosModel);
-
     }
 
     //Requisição DELETE
-
-    @DeleteMapping(path = "/livros/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping(path = "{id}")
     public void deletaLivro(@PathVariable Long id) {
         livrosService.deletar(id);
     }
-
 }

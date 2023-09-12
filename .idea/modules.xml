@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Exercicio.iml" filepath="$PROJECT_DIR$/.idea/Exercicio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BibliotecaZupApp.iml" filepath="$PROJECT_DIR$/.idea/BibliotecaZupApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Exercicio/Exercicio.iml" filepath="$PROJECT_DIR$/Exercicio/Exercicio.iml" />
     </modules>
   </component>
 </project>
